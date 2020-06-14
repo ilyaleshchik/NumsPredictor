@@ -1,10 +1,6 @@
 import pygame
 import random
 
-def random_color():
-    rgbl=[255,0,0]
-    random.shuffle(rgbl)
-    return tuple(rgbl)
 
 
 class Board():
@@ -20,12 +16,16 @@ class Board():
         for i in range(self.H):
             self.arr.append([])
             for j in range(self.W):
-               self.arr[-1].append((255, 255, 255))
+               self.arr[-1].append((0, 0, 0))
 
+
+    def get_width(self):
+        return self.WIDTH
+    def get_height(self):
+        return self.HEIGHT
 
     def draw(self):
-        # self.WIN.fill((0, 0, 0))
-
+        self.WIN.fill((255, 255, 255))
         for i in range(self.H):
             for j in range(self.W):
                 pygame.draw.rect(self.WIN, self.arr[i][j] , (j * self.PIXELWIDTH + 1, i * self.PIXELWIDTH + 1, self.PIXELWIDTH - 1, self.PIXELWIDTH - 1))
@@ -41,22 +41,4 @@ class Board():
             y = self.HEIGHT // self.PIXELWIDTH - 1
         self.arr[y][x] = color
     
-
-    # def Run(self):
-    #     run = True
-    #     while run:
-    #         self.timer.tick(144)
-    #         self.draw()
-
-    #         for event in pygame.event.get():
-    #             if event.type == pygame.QUIT:
-    #                 run = False
-    #                 break
-    #         mouse_statements = pygame.mouse.get_pressed()
-    #         if mouse_statements[0] == 1:
-    #             pos = pygame.mouse.get_pos()
-    #             self.DrawCell(pos, (0, 0, 0))
-    #         if mouse_statements[2] == 1:
-    #             pos = pygame.mouse.get_pos()
-    #             self.DrawCell(pos, (255, 255, 255))
 

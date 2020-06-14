@@ -8,13 +8,9 @@ class Graphic:
         self.HEIGHT = H
         self.FONT = pygame.font.SysFont(FONT, FONTSIZE)
         self.vals = [0.0] * 10
-        self.vals[0] = 0.027
-        self.vals[1] = 0.3
-        self.vals[7] = 0.66
-        self.vals[9] = 0.99
         self.timer = pygame.time.Clock()
         self.WIN = pygame.Surface((self.WIDTH, self.HEIGHT))
-        self.MAXVAL = 9
+        self.MAXVAL = 0
         self.LINESIZE = linesize
 
     def draw(self):
@@ -35,7 +31,8 @@ class Graphic:
         max_label = cur_font.render(f'{self.MAXVAL} is answer now!', 1, (0, 0, 0))
         self.WIN.blit(max_label, (100, 450))
 
-
+    def ChangeMaxVal(self, cur):
+        self.MAXVAL = cur
 
     def update_max(self, newVal):
         self.MAXVAL = newVal
@@ -43,23 +40,3 @@ class Graphic:
 
     def update_vals(self, arr):
         self.vals = arr
-
-#     def Run(self):
-#         run = True
-#         seed(1)
-#         while run:
-#             self.timer.tick(144)
-#             self.draw()
-
-
-#             for ev in pygame.event.get():
-#                 if ev.type == pygame.QUIT:
-#                     run = False
-#                     break
-
-#         pygame.quit()
-
-
-# g = Graphic(300, 500, "IMPACT", 25, 200)
-
-# g.Run()
