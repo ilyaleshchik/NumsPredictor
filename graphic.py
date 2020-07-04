@@ -22,7 +22,7 @@ class Graphic:
         for i in range(10):
             self.WIN.blit(labels[i], (50, lstY + 10))
             pygame.draw.rect(self.WIN, (40, 191, 141), (80, lstY + 10 + labels[i].get_height() // 2 - 5, self.LINESIZE, 10))
-            pygame.draw.rect(self.WIN, (237, 0, 0), (80, lstY + 10 + labels[i].get_height() // 2 - 5, self.LINESIZE * self.vals[i], 10))
+            pygame.draw.rect(self.WIN, (237, 0, 0), (80, lstY + 10 + labels[i].get_height() // 2 - 5, int(self.LINESIZE * self.vals[i]), 10))
             lstY += 10
             lstY += labels[i].get_height()
         
@@ -36,7 +36,6 @@ class Graphic:
 
     def update_max(self, newVal):
         self.MAXVAL = newVal
-
 
     def update_vals(self, arr):
         self.vals = arr

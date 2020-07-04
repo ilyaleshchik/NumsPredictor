@@ -31,7 +31,7 @@ class App:
 
     def Draw(self):
         self.WINDOW.fill((255, 255, 255))
-        self.BOARD.draw()
+        self.BOARD.draw() 
         self.GRAPHIC.draw()
         self.WINDOW.blit(self.GRAPHIC.WIN, (self.GraphicX, self.GraphicY))
         self.WINDOW.blit(self.BOARD.WIN, (self.BoardX, self.BoardY))
@@ -46,13 +46,16 @@ class App:
         res = (np.asfarray(data) / 255.0 * 0.99) + 0.01
         return res
 
-    def TrainNN(self):
+    def TrainNN(self, eras):
         trainig_data = open("mnist_train.csv", 'r')
         trainig_list = trainig_data.readlines()
         trainig_data.close()
-        for e in range(3):
+        for e in range(eras):
             for data in trainig_list:
                 all_vals = data.split(',')
+                # for i in range(1, len(all_vals)):
+                #     if all_vals[i] != 0:
+                #         all_vals[i] = 234
                 inputs = (np.asfarray(all_vals[1:]) / 255.0 * 0.99) + 0.01
                 tragets = np.zeros(10) + 0.01
                 tragets[int(all_vals[0])] = 0.99
@@ -67,6 +70,12 @@ class App:
             inputs = self.PrepareBoard()
 
             res = self.Network.Query(inputs)
+
+            vals = []
+            for val in res:
+                vals.append(val)
+
+            self.GRAPHIC.update_vals(vals)
 
             ans = np.argmax(res)
 
@@ -89,7 +98,7 @@ class App:
 
 game = App(1005, 800, 300, 0, 0, 0)
 
-game.TrainNN()
+game.TrainNN(1)
 
 scored = []
 
